@@ -99,6 +99,7 @@ http.createServer(function (req, res) {
     req.on('data', function (data) {
         wsServer.broadcast(data, {binary: true});
     });
+    res.connection.setTimeout(0);
 }).listen(configServer.streamPort, function () {
     console.log('Listening for video stream on port ' + configServer.streamPort);
 
@@ -116,7 +117,8 @@ leftForward.dir(mraa.DIR_OUT);
 rightForward.dir(mraa.DIR_OUT);
 rightBackward.dir(mraa.DIR_OUT);
 
-var DEFAULT_DURATION = 200;
+var DEFAULT_DURATION = 900;
+var TURN_DURATION = 200;
 
 function roverForward(secs) {
     leftForward.write(1);
@@ -142,7 +144,7 @@ function roverLeft(secs) {
     setTimeout(function () {
         leftBackward.write(0);
         rightForward.write(0);
-    }, secs || DEFAULT_DURATION);
+    }, secs || TURN_DURATION);
 }
 
 function roverRight(secs) {
@@ -151,7 +153,7 @@ function roverRight(secs) {
     setTimeout(function () {
         leftForward.write(0);
         rightBackward.write(0);
-    }, secs || DEFAULT_DURATION);
+    }, secs || TURN_DURATION);
 }
 
 function halt() {
