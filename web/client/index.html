@@ -41,6 +41,26 @@
     var client = new WebSocket('ws://' + document.domain + ':8084');
     client.send("test");
     var player = new jsmpeg(client, {canvas: canvas});
+
+    document.onkeydown = function (e) {
+        e = e || window.event;
+        switch (e.keyCode){
+            case 38: // up
+                console.log("up");
+                break;
+            case 40: // down
+                console.log("down");
+                break;
+            case 37: // left
+                console.log("left");
+                break;
+            case 39: // right
+                console.log("right");
+                break;
+        }
+    }
+
+
 </script>
 </body>
 </html>
