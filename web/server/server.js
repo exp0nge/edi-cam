@@ -86,10 +86,10 @@ http.createServer(function (req, res) {
 });
 
 // Pin initialization
-var leftBackward = mraa.Gpio(2),
-    leftForward = mraa.Gpio(3),
-    rightForward = mraa.Gpio(4),
-    rightBackward = mraa.Gpio(5);
+var leftBackward = new mraa.Gpio(2),
+    leftForward = new mraa.Gpio(3),
+    rightForward = new mraa.Gpio(4),
+    rightBackward = new mraa.Gpio(5);
 leftBackward.dir(mraa.DIR_OUT);
 leftForward.dir(mraa.DIR_OUT);
 rightForward.dir(mraa.DIR_OUT);
