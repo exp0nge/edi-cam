@@ -32,6 +32,7 @@ var height = 240;
 
 // WebSocket server
 var wsServer = new (ws.Server)({port: configServer.wsPort});
+var commandWsServer = new (ws.Server)({port: configServer.commandWsPort});
 console.log('WebSocket server listening on port ' + configServer.wsPort);
 
 wsServer.on('connection', function (socket) {
@@ -52,10 +53,16 @@ wsServer.on('connection', function (socket) {
 
 });
 
-wsServer.on('message', function incoming(data, flags) {
+commandWsServer.on('connection', function (socket) {
+    console.log('Command socket connected!');
+    
+    commandWsServer.on('message', function incoming(data, flags) {
     console.log(data);
     console.log(flags);
 });
+});
+
+
 
 wsServer.broadcast = function (data, opts) {
     for (var i in this.clients) {

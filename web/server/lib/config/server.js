@@ -4,5 +4,6 @@ module.exports = {
   httpPort: 8080,
   streamPort: 8082,
   wsPort: 8084,
+  commandWsPort: 8085,
   staticFolder: path.join(__dirname + '/../../../client')
 };

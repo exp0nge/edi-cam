@@ -41,7 +41,9 @@
     var client = new WebSocket('ws://' + document.domain + ':8084');
     var player = new jsmpeg(client, {canvas: canvas});
 
-    client.onopen = function (e) {
+
+    var commandClient = new WebSocket('ws://' + document.domain + ':8085');
+    commandClient.onopen = function (e) {
         client.send("hello");
     };
 
