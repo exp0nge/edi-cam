@@ -55,13 +55,28 @@ wsServer.on('connection', function (socket) {
 
 commandWsServer.on('connection', function (socket) {
     console.log('Command socket connected!');
-    
-    commandWsServer.on('message', function incoming(data, flags) {
-    console.log(data);
-    console.log(flags);
-});
-});
 
+    socket.on('message', function incoming(command) {
+        console.log("parsing %s", command);
+        switch (command) {
+            case "up":
+                roverForward();
+                break;
+            case "down":
+                roverBackward();
+                break;
+            case "left":
+                roverLeft();
+                break;
+            case "right":
+                roverRight();
+                break;
+            case "space":
+                halt();
+                break;
+        }
+    });
+});
 
 
 wsServer.broadcast = function (data, opts) {
@@ -138,6 +153,13 @@ function roverRight(secs) {
         leftForward.write(0);
         rightBackward.write(0);
     }, secs || DEFAULT_DURATION);
+}
+
+function halt() {
+    leftForward.write(0);
+    leftBackward.write(0);
+    rightBackward.write(0);
+    rightForward.write(0);
 }
 
 module.exports.app = app;

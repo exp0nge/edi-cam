@@ -44,30 +44,35 @@
 
     var commandClient = new WebSocket('ws://' + document.domain + ':8085');
     commandClient.onopen = function (e) {
-        client.send("hello");
-    };
+        document.onkeydown = function (e) {
+            e = e || window.event;
+            switch (e.keyCode) {
+                case 38: // up
+                    console.log("up");
+                    commandClient.send("up");
+                    break;
+                case 40: // down
+                    console.log("down");
+                    commandClient.send("down");
 
-    document.onkeydown = function (e) {
-        e = e || window.event;
-        switch (e.keyCode){
-            case 38: // up
-                console.log("up");
-                break;
-            case 40: // down
-                console.log("down");
-                break;
-            case 37: // left
-                console.log("left");
-                break;
-            case 39: // right
-                console.log("right");
-                break;
-            case 32: // space
-                console.log("space");
-                break;
+                    break;
+                case 37: // left
+                    console.log("left");
+                    commandClient.send("left");
+
+                    break;
+                case 39: // right
+                    console.log("right");
+                    commandClient.send("right");
+
+                    break;
+                case 32: // space
+                    console.log("space");
+                    commandClient.send("space");
+                    break;
+            }
         }
-    }
-
+    };
 
 </script>
 </body>
