@@ -39,8 +39,11 @@
 
     // Start the player
     var client = new WebSocket('ws://' + document.domain + ':8084');
-    client.send("test");
     var player = new jsmpeg(client, {canvas: canvas});
+
+    client.onopen = function (e) {
+        client.send("hello");
+    };
 
     document.onkeydown = function (e) {
         e = e || window.event;
