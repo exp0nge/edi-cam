@@ -57,7 +57,6 @@ commandWsServer.on('connection', function (socket) {
     console.log('Command socket connected!');
 
     socket.on('message', function incoming(command) {
-        console.log("parsing %s", command);
         switch (command) {
             case "up":
                 roverForward();
@@ -117,7 +116,7 @@ leftForward.dir(mraa.DIR_OUT);
 rightForward.dir(mraa.DIR_OUT);
 rightBackward.dir(mraa.DIR_OUT);
 
-var DEFAULT_DURATION = 0.3;
+var DEFAULT_DURATION = 200;
 
 function roverForward(secs) {
     leftForward.write(1);
